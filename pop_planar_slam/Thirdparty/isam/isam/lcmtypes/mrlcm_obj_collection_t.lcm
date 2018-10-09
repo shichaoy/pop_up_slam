@@ -1,0 +1,14 @@
+package mrlcm;
+
+struct obj_collection_t
+{
+  int32_t id;     // ID of collection, needed for example for links
+  string name;    // name to display in viewer
+  int16_t type;   // what to draw, see constants below
+  boolean reset;  // start from scratch or keep previous data
+
+  int32_t nobjs;
+  obj_t objs[nobjs];
+
+  const int16_t POSE=1, TREE=2, SQUARE=3, POSE3D=4;
+}

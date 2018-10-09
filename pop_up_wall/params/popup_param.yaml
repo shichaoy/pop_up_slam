@@ -1,0 +1,19 @@
+# python find edges parameters
+
+pre_vertical_thre:       15
+pre_minium_len:          15
+pre_contour_close_thre:  50
+interval_overlap_thre:   20
+post_short_thre:         20
+post_bind_dist_thre:     15
+post_merge_dist_thre:    10  # small of this, actually I did similiar step before
+post_merge_angle_thre:   10
+post_extend_thre:        50  
+
+
+# c++ pop up cloud parameters
+downsample_contour:    true
+use_fast_edges_detection:  false
+cloud_downsample_rate: 1  #20
+
+plane_cam_dist_thre: 10

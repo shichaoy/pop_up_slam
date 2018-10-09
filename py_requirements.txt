@@ -1,0 +1,4 @@
+intervaltree
+scikit-image
+cython
+numpy

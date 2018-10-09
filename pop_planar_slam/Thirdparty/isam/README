@@ -1,0 +1,45 @@
+
+Incremental Smoothing and Mapping (iSAM) library
+Michael Kaess, Hordur Johannsson, David Rosen, John Leonard, 2012
+
+isamlib/  - Source code for the iSAM library
+include/  - Header files for the iSAM library
+isam/     - Source code for main iSAM executable
+examples/ - Example code for iSAM
+doc/      - Documentation (after calling "make doc")
+misc/     - Code referenced from publications
+data/     - Example data files for 2D and 3D
+lib/      - iSAM library (after calling "make")
+bin/      - Executables (after calling "make")
+
+Type "make doc" to generate the full source documentation including
+installation instructions and examples. Then point your browser to:
+doc/html/index.html
+
+The latest documentation is also available online at:
+http://people.csail.mit.edu/kaess/isam/
+
+--------------
+
+Overview:
+
+The iSAM library provides a range of existing functionality for
+least-squares optimization, focused on the SLAM problem (e.g. 2D/3D
+pose graph, landmarks, visual SLAM). In addition to standard batch
+optimization, efficient incremental optimization is provided for sets
+of variables (nodes) and constraints (factors) that grow over
+time. The library performs (incremental) QR matrix factorization to
+solve the normal equations. Nonlinear constraints are dealt with using
+Gauss-Newton, Powell's Dog leg or, for batch only, the
+Levenberg-Marquardt algorithm. The default quadratic cost function can
+be replaced by a general cost function, allowing the use of robust
+estimators.
+
+Beyond the provided functionality, the library can easily be extended
+by the user to other sparse least-squares problems. In particular,
+the user can define new nodes, containing variables to be estimated as
+well as an exponential map for dealing with over-parameterized
+representations. Similarly, the user can define new factors,
+containing the error function for a given constraint and optionally a
+symbolic Jacobian for cases in which the provided numerical
+differentiation is not sufficiently fast.

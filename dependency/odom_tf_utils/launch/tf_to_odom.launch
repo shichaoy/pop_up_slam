@@ -1,0 +1,10 @@
+<!-- -->
+<launch>    
+    <node pkg="odom_tf_utils" type="tf_to_odom" name="tf_to_odom" output="screen">
+	<param name="odom_topic" value="/truth_pose" />
+	<param name="source_frame" value ="/world"/>  <!--/image_raw -->
+	<param name="target_frame" value ="/openni_rgb_optical_frame"/>  <!--/camera_info -->
+	<param name="frequency" value="30" />
+    </node>
+
+</launch>

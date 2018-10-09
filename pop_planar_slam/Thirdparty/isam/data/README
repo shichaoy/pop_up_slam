@@ -1,0 +1,66 @@
+Short summary of the datasets
+
+File formats:
+
+Various file formats are parsed by iSAM. Note that often encountered
+variable initialization entries (eg. VERTEX) are not supported, as in
+online settings only the measurements are available, and the
+initialization has to be obtained from the measurements. Also, the
+measurements must be in time order as actually obtained by the robot.
+All measurement entries follow the same convention:
+
+NAME id1 id2 measurement_1...measurement_n sqrtinf_1...sqrtinf_n
+
+where sqrtinf_i is the i-th entry of the upper triangular square root
+of the information matrix in row-first order (eg. sxx sxy sxt syy syt
+stt). Note that for 3D poses the angles and corresponding sqrtinf
+entries are in the order: roll-pitch-yaw.
+
+The groundtruth directory contains the original trajectory for some of
+the datasets, before noise has been added.
+
+
+2D datasets:
+
+- victoriaPark.txt
+  Creator: Eduard Nebot
+  Original data processed using tree detector by Ananth Ranganathan
+  and Michael Kaess, with duplicate poses removed while robot stationary.
+  6969 poses, 151 landmarks, 3640 landmark measurements, 6968 odometry constraints
+
+- manhattanOlson3500.txt
+  Creator: Ed Olson
+  See "Fast Iterative Alignment of Pose Graphs with Poor Initial Estimates", 
+  Edwin Olson, John Leonard and Seth Teller, ICRA 2006
+  Simulated pose graph.
+  3500 poses and 5598 constraints (3499 odometry and 2099 loop closings)
+
+- city10000.txt
+  Creator: Hordur Johannsson and Michael Kaess
+  Simulated pose graph.
+  10000 poses, 20687 constraints (9999 odometry and 10688 loop closings)
+
+- cityTrees10000.txt
+  Creator: Hordur Johannsson and Michael Kaess
+  Simulated graph with landmarks.
+  10000 poses, 100 landmarks, 4443 landmark measurements, 9999 odometry constraints
+
+3D datasets:
+
+- sphere400.txt
+  Creator: Michael Kaess
+  Simulated trajectory along the surface of a sphere with the robot
+  poses perpendicular to the surface of the sphere.
+  400 poses, 779 constraints (399 odometry and 380 loop closings)
+
+- sphere2500.txt
+  Creator: Michael Kaess
+  Simulated trajectory along the surface of a sphere with the robot
+  poses perpendicular to the surface of the sphere.
+  2500 poses, 4949 constraints (2499 odometry and 2450 loop closings)
+
+- torus10000.txt
+  Creator: Michael Kaess
+  Simulated trajectory along the surface of a torus, essentially a Manhattan world
+  without opposite edges identified.
+  10000 poses, 22280 constraints (9999 odometry and 12281 loop closings)

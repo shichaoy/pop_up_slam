@@ -1,0 +1,5 @@
+package mrlcm;
+
+struct reset_collections_t
+{
+}

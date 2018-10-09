@@ -1,0 +1,10 @@
+
+Type "make doc" in the main directory (one level above this directory)
+to generate the full source documentation including installation
+instructions and examples. Then point your browser to:
+doc/html/index.html
+
+The latest documentation is also available online at:
+http://people.csail.mit.edu/kaess/isam/doc
+
+Michael Kaess, 2010

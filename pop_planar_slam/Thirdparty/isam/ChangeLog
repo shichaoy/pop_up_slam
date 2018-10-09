@@ -1,0 +1,62 @@
+
+iSAM 1.7 (Jul 2, 2013)
+- Generic Linear Constraint (GLC) added to support sparsification based
+  on the paper "Generic Factor-Based Node Marginalization and Edge
+  Sparsification for Pose-Graph SLAM" by Nicholas Carleavaris-Bianco and
+  Ryan Eustice, ICRA 2013. See examples/glc.cpp
+- Relative parameterization for homogeneous points added (McDonald et al.,
+  ECMR 11 and RAS 13)
+- Fixed compile problem in slam_monocular.h
+- Bug fix in non-relative formulation of slam_stereo.h
+- Numerically more stable quaternion conversion
+- Changed stack allocations of SparseVector to heap allocations to allow
+  for very large vectors
+- Added FindCholmod.cmake as a more portable way of finding CHOLMOD
+- Added option for marking nodes as deleted. The marked nodes and factors
+  are then deleted during update. This is more efficient then individually
+  removing nodes and factors
+- Added support for multiple parallel instances of covariance recovery
+
+iSAM 1.6 (Mar 30, 2012)
+- Factors now take a new Noise class instead of the square root
+  information matrix; existing calls are converted by wrapping the
+  matrix with the SqrtInf() constructor; additional options are
+  Covariance() and Information(), which internally convert to
+  square root information matrix
+- added Powell's dog leg algorithm for batch (superior to
+  Levenberg-Marquardt), and our novel incremental dog leg
+  algorithm (see D. Rosen et al., ICRA 2012)
+- better stopping criteria for batch Gauss-Newton (see
+  epsilon_abs and epsilon_rel in Properties)
+- added Levenberg-Marquardt option for batch optimization
+- Covariance access now through Slam.covariances; cloning allows
+  running covariances recovery in a separate thread
+- exponential map for homogeneous points in stereo, based on Quaternions
+- factors for stereo vision added (see J. McDonald et al., ECMR 2011)
+- exponential map made explicit, was only implicitly used in the context
+  of Euler angles so far; removed access_vector construct
+- rotations internally replaced by Quaternions for improved optimization
+- require() bug fixed, which removed all tests for Release mode;
+  now split into require() (always active) and requireDebug() (only
+  active in Debug mode, for time critical applications in inner loops)
+- simplified usage of anchor nodes, see examples/achorNodes
+- header file dependencies fixed (now using CMake's include_directories)
+- bug fix in covariance recovery (some off-diagonal entries were incorrectly
+  set to 0)
+- added support for accessing arbitrary covariance entries, not just
+  marginal covariances (see Slam.access_covariance() and
+  examples/covariance.cpp)
+- replaced Vector/Matrix classes by third party Eigen3 library (faster, and
+  provides full functionality, while Vector/Matrix only provided the
+  functions actively being used in iSAM)
+
+iSAM 1.5 (Nov 12, 2010)
+- code optimization, reducing execution time for the Manhattan sequence by half
+- added optional CSparse-based batch factorization for comparison with CHOLMOD
+- changed default properties:
+  + solve in every step (instead of every 10)
+  + max_iterations for batch_optimization 20 (instead of 0 = unlimited)
+- added toggle (key 'c') to flip background color of 3D viewer
+
+iSAM 1.4 (Aug 29, 2010)
+- initial public release

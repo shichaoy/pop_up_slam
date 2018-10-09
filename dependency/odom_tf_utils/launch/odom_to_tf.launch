@@ -1,0 +1,14 @@
+<!-- -->
+<launch>    
+    
+    <node pkg="odom_tf_utils" type="odom_to_tf" name="odom_to_tf" args="50" output="screen">
+<!--	<remap from="/odom" to ="/lsd_slam/pose_odom"/>  -->
+	<param name="stabilize" value="false" /> # only use yaw.
+	<param name="footprint" value="false" />
+	<param name="inverse" value="false" />	
+    </node>
+    
+<!-- 	<param name="/live_slam/Debug/printThreadingInfo" value="true" />  -->
+
+
+</launch>

@@ -1,0 +1,6 @@
+*~
+dataset/
+params/ORBvoc.bin
+params/ORBvoc.txt
+Thirdparty/DBoW2/build/
+Thirdparty/DBoW2/lib/

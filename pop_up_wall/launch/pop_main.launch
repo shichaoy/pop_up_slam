@@ -1,0 +1,10 @@
+<!-- -->
+<launch>
+    <param name="use_sim_time" value="false" />
+    <node pkg="pop_up_wall" type="pop_up_main_node" name="pop_up_main_node" args="50" output="screen">
+    </node>
+
+    <rosparam file="$(find pop_up_wall)/params/popup_param.yaml" command="load"/>
+
+
+</launch>

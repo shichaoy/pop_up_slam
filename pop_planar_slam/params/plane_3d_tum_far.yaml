@@ -1,0 +1,59 @@
+# Note, everything added here should also be added to other yaml. otherwise it may interver others
+# no lsd odometry pose, just plane slam
+running_mode: 6
+
+
+
+# camera calibration params
+calib_fx: 537.960322
+calib_fy: 319.1836410
+calib_cx: 539.597659
+calib_cy: 247.05382035
+
+
+ 
+# covariance for plane slam
+pose_sigma_x:     2  #1
+pose_sigma_y:     2  #1  local y global z
+pose_sigma_z:     2  #1
+pose_sigma_yaw:   2  #1
+pose_sigma_pitch: 2  #1
+pose_sigma_roll:  2  #1
+
+plane_sigma_x:    0.05   #0.01
+plane_sigma_y:    0.05   #0.01
+plane_sigma_z:    0.05   #0.01
+
+plane_sigma_dist_mul: 2
+
+
+
+# plane association threshold
+print_assoc_detail: false
+edge_asso_2ddist:  10000  # tum dataset is special
+edge_asso_planedist: 2
+edge_asso_proj:  -1.0
+edge_asso_angle: 35
+assoc_near_frames: 1000
+
+
+
+# loop closing params
+use_loop_close:  false
+
+# reprojt 3D cloud onto 2d image
+last_frame_id: 80
+final_reproject_label_img: false
+final_reproject_depth_img: false
+get_edge_labelmap:     false
+if_record_pose: false
+
+
+
+# corrupte the odometry
+corrupt_x_scale:     1  #1
+corrupt_y_scale:     1  #1
+corrupt_z_scale:     1  #1
+corrupt_yaw_scale:   1  #0.2
+corrupt_pitch_scale: 1  #0.2
+corrupt_roll_scale:  1  #0.2

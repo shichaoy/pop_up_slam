@@ -1,0 +1,12 @@
+package mrlcm;
+
+struct cov_t
+{
+  int64_t id; // unique ID, can be timestamp
+
+  int32_t collection;
+  int64_t element_id;
+
+  int32_t n;
+  double entries[n]; // typically xx,xy,xz,yy,yz,zz
+}

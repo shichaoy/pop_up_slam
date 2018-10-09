@@ -1,0 +1,10 @@
+package mrlcm;
+
+struct link_t
+{
+  int64_t id; // unique ID, can be timestamp
+  int32_t collection1;
+  int64_t id1;
+  int32_t collection2;
+  int64_t id2;
+}

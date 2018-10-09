@@ -1,0 +1,12 @@
+package mrlcm;
+
+struct link_collection_t
+{
+  int32_t id;     // ID of collection, needed for example for links
+  string name;    // name to display in viewer
+  int16_t type;   // currently unused;
+  boolean reset;  // start from scratch or keep previous data
+
+  int32_t nlinks;
+  link_t links[nlinks];
+}
