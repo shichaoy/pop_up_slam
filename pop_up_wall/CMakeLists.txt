@@ -21,7 +21,7 @@ find_package(Boost REQUIRED COMPONENTS system)
 find_package(OpenCV REQUIRED)
 find_package(PCL REQUIRED)
 find_package(Eigen REQUIRED)
-find_package(PythonLibs 2.7.6 REQUIRED) 
+find_package(PythonLibs 2.7 REQUIRED) 
 
 message(STATUS "Found OpencvDirs-----------------------------")
 message(STATUS ${OpenCV_INCLUDE_DIRS})

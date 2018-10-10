@@ -5,8 +5,8 @@ This code contains a basic implementation for pop-up plane SLAM. Given RGB and g
 
 **Related Paper:**
 
-* **Pop-up SLAM: Semantic Monocular Plane SLAM for Low-texture Environments**, IROS 2017, S. Yang, Y. Song, M. Kaess, S. Scherer [**PDF**](http://www.frc.ri.cmu.edu/~syang/Publications/iros_2016.pdf)
-* **Real-time 3D Scene Layout from a Single Image Using Convolutional Neural Networks**, ICRA 2017, S. Yang, D. Maturana, S. Scherer  [**PDF**](http://www.frc.ri.cmu.edu/~syang/Publications/icra_2016.pdf)
+* **Pop-up SLAM: Semantic Monocular Plane SLAM for Low-texture Environments**, IROS 2016, S. Yang, Y. Song, M. Kaess, S. Scherer [**PDF**](http://www.frc.ri.cmu.edu/~syang/Publications/iros_2016_popslam.pdf)
+* **Real-time 3D Scene Layout from a Single Image Using Convolutional Neural Networks**, ICRA 2016, S. Yang, D. Maturana, S. Scherer  [**PDF**](http://www.frc.ri.cmu.edu/~syang/Publications/icra_2016_sinpop.pdf)
 
 If you use the code in your research work, please cite the above paper. Feel free to contact the authors if you have any further questions.
 
@@ -15,7 +15,7 @@ If you use the code in your research work, please cite the above paper. Feel fre
 # Installation
 
 ### Prerequisites
-This code contains several ros packages. We test it in ***ROS indigo/kinetic, Ubuntu 14.04/16.04, Opencv 2/3***. Create or use existing a ros workspace.
+This code contains several ros packages. We test it in **ROS indigo/kinetic, Ubuntu 14.04/16.04, Opencv 2/3**. Create or use existing a ros workspace.
 ```bash
 mkdir -p ~/popup_ws/src
 cd ~/popup_ws/src
