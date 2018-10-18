@@ -1,6 +1,6 @@
 /*
  * line_detection interface
- * Copyright Shichao Yang,2016, Carnegie Mellon University
+ * Copyright Shichao Yang,2018, Carnegie Mellon University
  * Email: shichaoy@andrew.cmu.edu
  *
  */
@@ -13,74 +13,87 @@
 #include <opencv2/highgui.hpp>
 
 #include <iostream>
+#include <fstream>
 #include <ctime>
 #include <line_lbd/line_lbd_allclass.h>
 
+#include <ros/ros.h>
+
 using namespace cv;
-using namespace cv::line_descriptor;
 using namespace std;
-
-static const char* keys =
-{ "{@image_path | | Image path }" };
-
-static void help()
-{
-  cout << "\nThis example shows the functionalities of lines extraction " << "furnished by BinaryDescriptor class\n"
-       << "Please, run this sample using a command in the form\n" << "./example_line_descriptor_lines_extraction <path_to_input_image>" << endl;
-}
 
 
 int main( int argc, char** argv )
 {
       /* get parameters from comand line */
       if(argc<2){
-	help();
-	return -1;
+      std::cout<<"Provide an image name"<<endl;
+      return -1;
       }
-      
+ 
+      ros::init(argc, argv, "detect lines");
+      ros::NodeHandle nh; 
+ 
       std::string image_path(argv[1]);
-      
-      /* load image */
-      cv::Mat imageMat = imread( image_path, 1 );
-      if( imageMat.data == NULL )
-      {
-	std::cout << "Error, image could not be loaded. Please, check its path \n"<<image_path << std::endl;
-	return -1;
-      }
             
-      /* create a random binary mask */
-      cv::Mat mask = Mat::ones( imageMat.size(), CV_8UC1 );
-
+      cv::Mat raw_img = imread( image_path, 1 );
+      if( raw_img.data == NULL )
+      {
+      std::cout << "Error, image could not be loaded. Please, check its path \n"<<image_path << std::endl;
+      return -1;
+      }
+      
+      
+      std::string save_folder;
+      bool use_LSD_algorithm;
+      bool save_to_imgs;
+      bool save_to_txts;
+      nh.param<std::string>("save_folder", save_folder, "$(find line_lbd)/data");
+      nh.param<bool>("use_LSD_algorithm",use_LSD_algorithm,true);
+      nh.param<bool>("save_to_imgs",save_to_imgs,false);
+      nh.param<bool>("save_to_txts",save_to_txts,false);
+      
+      
       BinaryDescriptor::Params line_params;
       line_params.numOfOctave_ = 1;
       line_params.Octave_ratio = 2.0;  
+
+      line_lbd_detect* line_lbd_ptr = new line_lbd_detect(line_params.numOfOctave_,line_params.Octave_ratio); 
+      line_lbd_ptr->use_LSD = use_LSD_algorithm;
+      line_lbd_ptr->line_length_thres = 15;  // remove short edges
       
-      std::clock_t start = std::clock();
       
       // using my line detector class, could select LSD or edline.
-      cv::Mat output4 = imageMat.clone();
-      line_params.numOfOctave_ = 1;
-      line_params.Octave_ratio = 2.0;
-      line_lbd_detect* line_lbd_ptr = new line_lbd_detect(line_params.numOfOctave_,line_params.Octave_ratio); 
-      line_lbd_ptr->use_LSD=false;
-      line_lbd_ptr->line_length_thres=10;
-      std::vector<std::vector< KeyLine>> keylines_out;
-      std::vector<cv::Mat> line_descrips;
-      line_lbd_ptr->detect_descrip_lines_octaves(imageMat,keylines_out,line_descrips);
-//       std::cout<<"my keylines_out size "<<keylines_out[0].size()<<std::endl;
-    //   std::cout<<"line_descrips "<<line_descrips[0]<<std::endl;
+      cv::Mat out_edges;
+      std::vector< KeyLine> keylines_raw,keylines_out;
+      line_lbd_ptr->detect_raw_lines(raw_img,keylines_raw);
+      line_lbd_ptr->filter_lines(keylines_raw,keylines_out);  // remove short lines
       
-      
-      /* draw lines extracted from octave 0 */
-      if( output4.channels() == 1 )
-	cvtColor( output4, output4, COLOR_GRAY2BGR );  
-      drawKeylines(imageMat, keylines_out[0], output4, cv::Scalar( 0, 0, 255 ),2); // B G R paper cv::Scalar( 0, 150, 0 ) 2   Scalar::all( -1 ),3
-      imshow( "My Line detector", output4 );
+      // show image
+      if( raw_img.channels() == 1 )
+        cvtColor( raw_img, raw_img, COLOR_GRAY2BGR );
+      cv::Mat raw_img_cp;
+      drawKeylines(raw_img, keylines_out, raw_img_cp, cv::Scalar( 0, 150, 0 ),2); // B G R
+      imshow( "Line detector", raw_img_cp );
       waitKey();
-      char charbuf[500];
-      snprintf(charbuf,500,"/home/yamahas/ysc_space/mavscout/src/line_lbd/data/paper/frame_edge_%05d.png",10); //TODO change file directory.
-      cv::imwrite(charbuf,output4);  
       
-    //   , cv::Scalar( 120, 0, 0 ),2
+      if (save_to_imgs)
+      {
+        std::string img_save_name = save_folder+"saved_edges.jpg";
+        cv::imwrite(img_save_name,raw_img_cp);
+      }
+      
+      if (save_to_txts)
+      {
+        std::string txt_save_name = save_folder+"saved_edges.txt";
+        ofstream resultsFile;
+        resultsFile.open(txt_save_name);
+        for (int j=0;j<keylines_out.size();j++)
+        {
+          resultsFile <<keylines_out[j].startPointX <<"\t" <<keylines_out[j].startPointY  <<"\t"
+                  <<keylines_out[j].endPointX   <<"\t" <<keylines_out[j].endPointY    <<endl;
+        }
+        resultsFile.close();
+      }
   
 }

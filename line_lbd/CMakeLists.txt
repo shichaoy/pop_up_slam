@@ -6,6 +6,7 @@ project(line_lbd)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   cmake_modules
+  roscpp
 )
 
 ## System dependencies are found with CMake's conventions
@@ -29,7 +30,7 @@ find_package(OpenCV REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES line_lbd_lib
-  CATKIN_DEPENDS cmake_modules
+  CATKIN_DEPENDS cmake_modules roscpp
 #  DEPENDS system_lib
 )
 
