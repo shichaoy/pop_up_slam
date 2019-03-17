@@ -51,9 +51,9 @@ def get_intersect_len_tree(query, interval_tree):
         return all_intersect_length
     else:
         for i in xrange(len(all_intervals)):            
-            overlap1=query[1]- all_intervals[0].begin;
-            overlap2=all_intervals[0].end-query[0];
-            intersect_length=min(overlap1, overlap2, abs(query[1]-query[0]), all_intervals[0].length())
+            overlap1=query[1]- all_intervals[i].begin;
+            overlap2=all_intervals[i].end-query[0];
+            intersect_length=min(overlap1, overlap2, abs(query[1]-query[0]), all_intervals[i].length())
             all_intersect_length = all_intersect_length+intersect_length    
     return all_intersect_length 
 
