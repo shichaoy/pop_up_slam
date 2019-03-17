@@ -33,6 +33,8 @@ sh install_dependenices.sh
 ```bash
 sh download_data.sh
 ```
+if the download link breaks, please download [here](https://drive.google.com/open?id=192wwtxHryaTYMNsdYEu_YI9iQNy1BCbd) and follow sh file to process it. Will fix it later.
+
 If ```wget``` not installed, ```sudo apt-get install wget ```
 
 
